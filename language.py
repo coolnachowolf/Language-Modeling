@@ -215,7 +215,11 @@ Returns: str
 '''
 from random import choices
 def generateTextFromUnigrams(count, words, probs):
-    return
+    output_string = ''
+    for i in range(count):
+        word_list= choices(words, weights=probs) 
+        output_string = output_string + word_list[0] + ' '
+    return output_string
 
 
 '''
@@ -372,7 +376,7 @@ def scatterPlot(xs, ys, labels, title):
 if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     test.week1Tests()
-    test.testGetTopWords()
+    test.testGenerateTextFromUnigrams()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
     
