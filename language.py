@@ -170,7 +170,18 @@ Parameters: dict mapping strs to ints ; dict mapping strs to (dicts mapping strs
 Returns: dict mapping strs to (dicts mapping strs to (lists of values))
 '''
 def buildBigramProbs(unigramCounts, bigramCounts):
-    return
+    bigram_prob = {}
+    for i in bigramCounts:
+        words_list = []
+        probs_list = []
+        temp_dict = {}
+        for j in bigramCounts[i]:
+            words_list.append(j)
+            probs_list.append(bigramCounts[i][j]/unigramCounts[i])
+            temp_dict["words"] = words_list
+            temp_dict["probs"] = probs_list
+        bigram_prob[i] = temp_dict
+    return bigram_prob
 
 
 '''
@@ -348,7 +359,7 @@ def scatterPlot(xs, ys, labels, title):
 if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     test.week1Tests()
-    test.testBuildUnigramProbs()
+    test.testBuildBigramProbs()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
     
