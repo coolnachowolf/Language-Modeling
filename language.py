@@ -35,7 +35,11 @@ Parameters: 2D list of strs
 Returns: int
 '''
 def getCorpusLength(corpus):
-    return
+    count = 0
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            count+=1
+    return count
 
 
 '''
