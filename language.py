@@ -122,7 +122,17 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def countBigrams(corpus):
-    return
+    bigram_dict = {}
+    for line in corpus:
+        for word in range(len(line)-1):
+            if line[word] not in bigram_dict:
+                bigram_dict[line[word]] = {}
+            if line[word + 1] not in bigram_dict[line[word]]:
+                bigram_dict[line[word]][line[word+1]] = 1
+            else:
+                bigram_dict[line[word]][line[word+1]] += 1
+    return bigram_dict
+    
 
 
 ### WEEK 2 ###
