@@ -191,7 +191,20 @@ Parameters: int ; list of strs ; list of floats ; list of strs
 Returns: dict mapping strs to floats
 '''
 def getTopWords(count, words, probs, ignoreList):
-    return
+    highProb_words = {}
+    for i in range(len(probs)):
+        if(words[i] not in ignoreList):
+            highProb_words[words[i]] = probs[i]
+    topWords = {}
+    while(len(topWords) < count):
+        maximum = 0
+        for i in highProb_words:
+            if i not in topWords:
+                if highProb_words[i]>maximum:
+                    maximum = highProb_words[i]
+                    keys = i
+        topWords[keys] = maximum
+    return topWords
 
 
 '''
@@ -359,17 +372,17 @@ def scatterPlot(xs, ys, labels, title):
 if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     test.week1Tests()
-    test.testBuildBigramProbs()
+    test.testGetTopWords()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
     
     ## Uncomment these for Week 2 ##
-
+'''
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
     test.runWeek2()
-
+'''
 
     ## Uncomment these for Week 3 ##
 """
