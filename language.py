@@ -64,7 +64,17 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countUnigrams(corpus):
-    return
+    count_dictionary = {}
+    word_list = buildVocabulary(corpus)
+    for w in word_list:
+        count = 0
+        for i in range(len(corpus)):
+            for j in range(len(corpus[i])):
+                l = corpus[i][j]
+                if w==l:
+                    count += 1
+        count_dictionary[w] = count
+    return count_dictionary
 
 
 '''
