@@ -243,7 +243,7 @@ def generateTextFromBigrams(count, startWords, startWordProbs, bigramProbs):
     return (sentence.join(words_lst))
 
 
-### WEEK 3 ###
+#### WEEK 3 ####
 
 ignore = [ ",", ".", "?", "'", '"', "-", "!", ":", ";", "by", "around", "over",
            "a", "on", "be", "in", "the", "is", "on", "and", "to", "of", "it",
