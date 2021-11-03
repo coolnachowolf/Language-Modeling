@@ -217,7 +217,7 @@ from random import choices
 def generateTextFromUnigrams(count, words, probs):
     output_string = ''
     for i in range(count):
-        word_list= choices(words, weights=probs) 
+        word_list = choices(words, weights=probs) 
         output_string = output_string + word_list[0] + ' '
     return output_string
 
@@ -307,7 +307,39 @@ Parameters: 2D list of strs ; 2D list of strs ; int
 Returns: dict mapping strs to (lists of values)
 '''
 def setupChartData(corpus1, corpus2, topWordCount):
-    return
+    total_count1 = getCorpusLength(corpus1)
+    unigrams1 = buildVocabulary(corpus1)
+    unigram_count1 = countUnigrams(corpus1)
+    probability1 = buildUnigramProbs(unigrams1, unigram_count1, total_count1)
+    dictionary1 = getTopWords(topWordCount, unigrams1, probability1, ignore)
+    total_count2 = getCorpusLength(corpus2)
+    unigrams2 = buildVocabulary(corpus2)
+    unigram_count2 = countUnigrams(corpus2)
+    probability2 = buildUnigramProbs(unigrams2, unigram_count2, total_count2)
+    dictionary2 = getTopWords(topWordCount, unigrams2, probability2, ignore)
+    dictionary = {}
+    topWords = []
+    for i in dictionary1:
+        topWords.append(i)
+    for i in dictionary2:
+        if i not in topWords:
+            topWords.append(i)
+    corpus1Probs = []
+    for i in topWords:
+        if i in dictionary1:
+            corpus1Probs.append(dictionary1[i])
+        else:
+            corpus1Probs.append(0)
+    corpus2Probs = []
+    for i in range(len(topWords)):
+        if topWords[i] in dictionary2:
+            corpus2Probs.append(dictionary2[topWords[i]])
+        else:
+            corpus2Probs.append(0)
+    dictionary['topWords'] = topWords
+    dictionary['corpus1Probs'] = corpus1Probs
+    dictionary['corpus2Probs'] = corpus2Probs
+    return dictionary
 
 
 '''
@@ -317,7 +349,9 @@ Parameters: 2D list of strs ; str ; 2D list of strs ; str ; int ; str
 Returns: None
 '''
 def graphTopWordsSideBySide(corpus1, name1, corpus2, name2, numWords, title):
-    return
+    result_dict = setupChartData(corpus1, corpus2, numWords)
+    sideBySideBarPlots(result_dict['topWords'], result_dict['corpus1Probs'], result_dict['corpus2Probs'], name1, name2, title)
+    return None
 
 
 '''
@@ -327,7 +361,9 @@ Parameters: 2D list of strs ; 2D list of strs ; int ; str
 Returns: None
 '''
 def graphTopWordsInScatterplot(corpus1, corpus2, numWords, title):
-    return
+    result_dict = setupChartData(corpus1, corpus2, numWords)
+    scatterPlot(result_dict['corpus1Probs'], result_dict['corpus2Probs'], result_dict['topWords'], title)
+    return None
 
 
 ### WEEK 3 PROVIDED CODE ###
