@@ -257,7 +257,13 @@ Parameters: 2D list of strs
 Returns: None
 '''
 def graphTop50Words(corpus):
-    return
+    total_count = getCorpusLength(corpus)
+    unigrams = buildVocabulary(corpus)
+    unigram_count = countUnigrams(corpus)
+    probability = buildUnigramProbs(unigrams, unigram_count, total_count)
+    dictionary = getTopWords(50, unigrams, probability, ignore)
+    barPlot(dictionary, "Top 50 Common Words")
+    return None
 
 
 '''
@@ -399,7 +405,6 @@ if __name__ == "__main__":
 
 
     ## Uncomment these for Week 3 ##
-"""
-    print("\/n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\/n")
+
+    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
     test.runWeek3()
-"""
