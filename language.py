@@ -279,7 +279,7 @@ def graphTopStartWords(corpus):
     probability = buildUnigramProbs(start_words, startWord_count, total_count)
     dictionary = getTopWords(50, start_words, probability, ignore)
     barPlot(dictionary, "Top 50 Common Start Words")
-    return
+    return None
 
 
 '''
@@ -289,7 +289,15 @@ Parameters: 2D list of strs ; str
 Returns: None
 '''
 def graphTopNextWords(corpus, word):
-    return
+    total_count = countUnigrams(corpus)
+    word_count = countBigrams(corpus)
+    words_probability = buildBigramProbs(total_count, word_count)
+    dictionary = words_probability[word]
+    words = dictionary['words']
+    probs = dictionary['probs']
+    plot_data = getTopWords(10, words, probs, ignore)
+    barPlot(plot_data, "Top 10 Occurences of a Word")
+    return None
 
 
 '''
