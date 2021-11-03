@@ -230,19 +230,16 @@ Returns: str
 '''
 def generateTextFromBigrams(count, startWords, startWordProbs, bigramProbs):
     words_lst = []
-    for x in range(count):
+    for i in range(count):
         if (len(words_lst) == 0 or words_lst[-1] == "."):
             word = choices(startWords, startWordProbs)
             words_lst.append(word[0])
         else:
             last_word = words_lst[-1]
-            # print(key)
             word_prob_dict = bigramProbs[last_word]
             word = choices(word_prob_dict['words'], word_prob_dict['probs'])
             words_lst.append(word[0])
-    #print(words_lst)
     sentence = " "
-    #print(sentence.join(words_lst))
     return (sentence.join(words_lst))
 
 
@@ -390,17 +387,16 @@ def scatterPlot(xs, ys, labels, title):
 if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     test.week1Tests()
-    test.testGenerateTextFromBigrams()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
     
     ## Uncomment these for Week 2 ##
-'''
+
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
     test.runWeek2()
-'''
+
 
     ## Uncomment these for Week 3 ##
 """
