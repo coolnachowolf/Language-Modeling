@@ -38,7 +38,7 @@ def getCorpusLength(corpus):
     count = 0
     for i in range(len(corpus)):
         for j in range(len(corpus[i])):
-            count+=1
+            count += 1
     return count
 
 
@@ -65,15 +65,12 @@ Returns: dict mapping strs to ints
 '''
 def countUnigrams(corpus):
     count_dictionary = {}
-    word_list = buildVocabulary(corpus)
-    for w in word_list:
-        count = 0
-        for i in range(len(corpus)):
-            for j in range(len(corpus[i])):
-                l = corpus[i][j]
-                if w==l:
-                    count += 1
-        count_dictionary[w] = count
+    for line in corpus:
+        for word in line:
+            if word in count_dictionary:
+                count_dictionary[word] += 1
+            else:
+                count_dictionary[word] = 1
     return count_dictionary
 
 
@@ -124,13 +121,13 @@ Returns: dict mapping strs to (dicts mapping strs to ints)
 def countBigrams(corpus):
     bigram_dict = {}
     for line in corpus:
-        for word in range(len(line)-1):
+        for word in range(len(line) - 1):
             if line[word] not in bigram_dict:
                 bigram_dict[line[word]] = {}
             if line[word + 1] not in bigram_dict[line[word]]:
-                bigram_dict[line[word]][line[word+1]] = 1
+                bigram_dict[line[word]][line[word + 1]] = 1
             else:
-                bigram_dict[line[word]][line[word+1]] += 1
+                bigram_dict[line[word]][line[word + 1]] += 1
     return bigram_dict
     
 
